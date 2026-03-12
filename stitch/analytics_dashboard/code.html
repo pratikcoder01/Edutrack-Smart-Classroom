@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EduTrack Analytics Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4F46E5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 flex flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary size-10 rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<h1 class="text-slate-900 dark:text-white text-lg font-bold leading-none">EduTrack</h1>
+<p class="text-slate-500 text-xs mt-1">Analytics Pro</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 text-primary font-semibold" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-sm">Attendance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm">Students</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">bar_chart_4_bars</span>
+<span class="text-sm">Academic Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="text-sm">Notifications</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
+<p class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-wider">Storage Usage</p>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full mb-2">
+<div class="bg-primary h-1.5 rounded-full w-[72%]"></div>
+</div>
+<p class="text-[11px] text-slate-500">7.2 GB of 10 GB used</p>
+</div>
+<button class="w-full mt-4 flex items-center justify-center gap-2 py-2.5 bg-primary text-white text-sm font-bold rounded-xl shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined text-sm">rocket_launch</span>
+                Upgrade Plan
+            </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-y-auto">
+<!-- Top Navbar -->
+<header class="h-16 flex items-center justify-between px-8 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
+<div class="flex items-center gap-4 flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border-none focus:ring-2 focus:ring-primary/20 text-sm" placeholder="Search student records, classes, or reports..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full relative">
+<span class="material-symbols-outlined">mail</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold leading-none">Prof. Anderson</p>
+<p class="text-[11px] text-slate-500 mt-1">Admin Account</p>
+</div>
+<div class="size-10 rounded-full bg-slate-200 overflow-hidden ring-2 ring-transparent group-hover:ring-primary/30 transition-all">
+<img class="w-full h-full object-cover" data-alt="Portrait of a smiling male teacher" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXodD4Jl511S2a4HZhbK9bfQAfnjw5rodzdkt1GofbqxlBr1jyXs9GynyIvugTPHjwIyLAjMTHKWvG6CIzswdNSGhmABLbGCNijhPs3o2tre5F1ua2c_5n_AXOploM1A487bdr2nVWPSvfQFBRCPSWC2QGuBA9RdxpSoIsLqcwJqn2h7NKejjENn3t0OVfkXyqLdUzKy4s9_MyeYTrVz3-lwMjcd3we-LdPgwT8YrW_uRqgZOp0LmRMx06zQOuQnfeFQtdafrjRs50"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-8">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Attendance Analytics</h2>
+<p class="text-slate-500 mt-1">Real-time performance metrics and student engagement levels.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-semibold hover:shadow-sm transition-all">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                        Filter
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-xl text-sm font-bold shadow-lg shadow-primary/20 hover:brightness-110 transition-all">
+<span class="material-symbols-outlined text-lg">download</span>
+                        Export Report
+                    </button>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="size-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center">
+<span class="material-symbols-outlined">person_pin</span>
+</div>
+<span class="text-green-500 text-xs font-bold bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">+12.4%</span>
+</div>
+<p class="text-sm font-medium text-slate-500">Total Students</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white mt-1">1,284</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="size-10 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 flex items-center justify-center">
+<span class="material-symbols-outlined">fact_check</span>
+</div>
+<span class="text-green-500 text-xs font-bold bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">+2.1%</span>
+</div>
+<p class="text-sm font-medium text-slate-500">Avg. Attendance</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white mt-1">94.2%</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="size-10 rounded-lg bg-amber-100 dark:bg-amber-900/30 text-amber-600 flex items-center justify-center">
+<span class="material-symbols-outlined">military_tech</span>
+</div>
+<span class="text-green-500 text-xs font-bold bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">+5%</span>
+</div>
+<p class="text-sm font-medium text-slate-500">Top Performers</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white mt-1">156</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="size-10 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-600 flex items-center justify-center">
+<span class="material-symbols-outlined">event_busy</span>
+</div>
+<span class="text-red-500 text-xs font-bold bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded-full">-8.2%</span>
+</div>
+<p class="text-sm font-medium text-slate-500">Total Absentees</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white mt-1">24</p>
+</div>
+</div>
+<!-- Main Charts Row -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<!-- Monthly Trend Chart -->
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Monthly Attendance Trend</h3>
+<div class="flex gap-2">
+<span class="flex items-center gap-1.5 text-xs font-medium text-slate-500">
+<span class="size-2 rounded-full bg-primary"></span> Current
+                            </span>
+<span class="flex items-center gap-1.5 text-xs font-medium text-slate-500">
+<span class="size-2 rounded-full bg-slate-200 dark:bg-slate-700"></span> Previous
+                            </span>
+</div>
+</div>
+<div class="h-64 flex items-end justify-between gap-4 px-2">
+<!-- Bar Chart Simulation -->
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-t-lg relative flex items-end overflow-hidden h-full">
+<div class="bg-primary/20 w-full h-[60%] absolute bottom-0"></div>
+<div class="bg-primary w-full h-[45%] relative z-10 transition-all group-hover:h-[50%]"></div>
+</div>
+<span class="text-xs text-slate-500 font-medium">Jan</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-t-lg relative flex items-end overflow-hidden h-full">
+<div class="bg-primary/20 w-full h-[70%] absolute bottom-0"></div>
+<div class="bg-primary w-full h-[55%] relative z-10 transition-all group-hover:h-[60%]"></div>
+</div>
+<span class="text-xs text-slate-500 font-medium">Feb</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-t-lg relative flex items-end overflow-hidden h-full">
+<div class="bg-primary/20 w-full h-[65%] absolute bottom-0"></div>
+<div class="bg-primary w-full h-[80%] relative z-10 transition-all group-hover:h-[85%]"></div>
+</div>
+<span class="text-xs text-slate-500 font-medium">Mar</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-t-lg relative flex items-end overflow-hidden h-full">
+<div class="bg-primary/20 w-full h-[85%] absolute bottom-0"></div>
+<div class="bg-primary w-full h-[75%] relative z-10 transition-all group-hover:h-[80%]"></div>
+</div>
+<span class="text-xs text-slate-500 font-medium">Apr</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-t-lg relative flex items-end overflow-hidden h-full">
+<div class="bg-primary/20 w-full h-[90%] absolute bottom-0"></div>
+<div class="bg-primary w-full h-[95%] relative z-10 transition-all group-hover:h-full"></div>
+</div>
+<span class="text-xs text-slate-500 font-medium">May</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-t-lg relative flex items-end overflow-hidden h-full">
+<div class="bg-primary/20 w-full h-[75%] absolute bottom-0"></div>
+<div class="bg-primary w-full h-[85%] relative z-10 transition-all group-hover:h-[90%]"></div>
+</div>
+<span class="text-xs text-slate-500 font-medium">Jun</span>
+</div>
+</div>
+</div>
+<!-- Absentee Quick Report -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Today's Absentees</h3>
+<a class="text-xs font-bold text-primary hover:underline" href="#">View All</a>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Student profile picture avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU211D8czTc94VLAI6-SbmQqeKvaCv_QJr8ECbhScYEX7zKP3gwILUOd0YYmmNd2dNpEEARMhVw2oZz3SdJhO4pQ_HIL5p05V4CJEWYD9LoptB71EwleNHrbo-51ZHwtAP9GJ3dfiRaZ7CyqQeX5A0QH1kRrRWBT0XtJD1iirGNUYvcYLmUoPdY4I754xHGtQtKj24GD1hR3Lwg5GUcKsEVx2hT4L7RCBaIEkpxN0cOM73WusNXp2Vb0CVdb6o5wmAzZCa0foVuSFP"/>
+</div>
+<div>
+<p class="text-sm font-bold">Jason Miller</p>
+<p class="text-[11px] text-slate-500">Grade 11-A</p>
+</div>
+</div>
+<span class="text-[10px] font-bold text-red-500 bg-red-100 dark:bg-red-900/30 px-2 py-0.5 rounded uppercase">Unexcused</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Student profile picture avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLIkJ9yVPLl05HEwAj0TdRVZ2PK7CYaSGw352_Hr9s2WFcaE0lDFh4VL4lVxC9oMKgb3fXk51dqHLicPlMVjI6trGdGrForT0q9BWJL5ZhEst0u3rjunEzsyq2mGnXi-Bb-EGjZ-i1AEoCWTrU3p8d-wBI3DmZcjUxMw-wcwNXf1fcDDkngRMmPkqZFqhjEGBQUVOpiZDyRazEFIeMPzAdANO-p_2gdZYVQXvX7iG-Eg120lonWc8bKX8LWNXk0QeR1gGNzaCWaTnf"/>
+</div>
+<div>
+<p class="text-sm font-bold">Sarah Connor</p>
+<p class="text-[11px] text-slate-500">Grade 10-C</p>
+</div>
+</div>
+<span class="text-[10px] font-bold text-amber-500 bg-amber-100 dark:bg-amber-900/30 px-2 py-0.5 rounded uppercase">Medical</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Student profile picture avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYcIzlWpCuyYDk2osG1-RupBOZxKIfOD17zvuiDbtBDDjff35kNVQYksp2BZ8IbV5vsPhAVcQrES0d8NTjJjdqZfqbaPGmOc3Kvs2N5gg5hthahEwbd_OBA5tYN_WUVaH6mBxPrz9ZbJlzt9bSFyzfCxhYj0UwHm2lcNRRZ_WTZj2YOxUVTPrwOHL5H8Ec9nHEaZr9GNkaUz-unadbHB5quPk1GX7vsMg4oH2MsqfkWwmbcySxGFrg6OR8HC14ISFW7CM5A-kNTuA4"/>
+</div>
+<div>
+<p class="text-sm font-bold">Marcus Wright</p>
+<p class="text-[11px] text-slate-500">Grade 12-B</p>
+</div>
+</div>
+<span class="text-[10px] font-bold text-slate-500 bg-slate-200 dark:bg-slate-700 px-2 py-0.5 rounded uppercase">Personal</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Student profile picture avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBynnvxEbfU5l2c3uvp3sjSJh2mHNHwhkvKXIMGOG868CiH5uSFgsuJti4O34uo1OkmNh-bPdeL-WXWt1MarVaf2hA9Um3tZHo3cp6r0TaM3MoNDI7rSgIngHolcQN68iq9VLdEbeLYTHraOp2rWE_Z7Nix2QNyls9cN45ot9B4SgP2TRBEQ8ZY_9EQQwVji0WpB43PUAA-YPOKVonHUcTU2v5cRRASMc-VVNuRqocoDMkNgzXabnJ-WAQWNQHTB8V9KyxecRhQ_aay"/>
+</div>
+<div>
+<p class="text-sm font-bold">Linda Blair</p>
+<p class="text-[11px] text-slate-500">Grade 11-A</p>
+</div>
+</div>
+<span class="text-[10px] font-bold text-red-500 bg-red-100 dark:bg-red-900/30 px-2 py-0.5 rounded uppercase">Unexcused</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Heatmap & Leaderboard -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+<!-- Attendance Heatmap -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Attendance Intensity</h3>
+<p class="text-xs text-slate-500">Weekly engagement distribution heatmap</p>
+</div>
+<select class="text-xs bg-slate-50 dark:bg-slate-800 border-none rounded-lg focus:ring-0">
+<option>Last 4 Weeks</option>
+<option>Current Term</option>
+</select>
+</div>
+<div class="grid grid-cols-7 gap-2 mb-2">
+<div class="text-[10px] font-bold text-slate-400 text-center uppercase">Mon</div>
+<div class="text-[10px] font-bold text-slate-400 text-center uppercase">Tue</div>
+<div class="text-[10px] font-bold text-slate-400 text-center uppercase">Wed</div>
+<div class="text-[10px] font-bold text-slate-400 text-center uppercase">Thu</div>
+<div class="text-[10px] font-bold text-slate-400 text-center uppercase">Fri</div>
+<div class="text-[10px] font-bold text-slate-400 text-center uppercase">Sat</div>
+<div class="text-[10px] font-bold text-slate-400 text-center uppercase">Sun</div>
+</div>
+<div class="grid grid-cols-7 gap-2">
+<!-- Simulated heatmap blocks -->
+<div class="aspect-square rounded bg-primary/20"></div>
+<div class="aspect-square rounded bg-primary/40"></div>
+<div class="aspect-square rounded bg-primary/90"></div>
+<div class="aspect-square rounded bg-primary/60"></div>
+<div class="aspect-square rounded bg-primary/30"></div>
+<div class="aspect-square rounded bg-slate-100 dark:bg-slate-800"></div>
+<div class="aspect-square rounded bg-slate-100 dark:bg-slate-800"></div>
+<div class="aspect-square rounded bg-primary/50"></div>
+<div class="aspect-square rounded bg-primary/100"></div>
+<div class="aspect-square rounded bg-primary/80"></div>
+<div class="aspect-square rounded bg-primary/90"></div>
+<div class="aspect-square rounded bg-primary/70"></div>
+<div class="aspect-square rounded bg-slate-100 dark:bg-slate-800"></div>
+<div class="aspect-square rounded bg-slate-100 dark:bg-slate-800"></div>
+<div class="aspect-square rounded bg-primary/30"></div>
+<div class="aspect-square rounded bg-primary/60"></div>
+<div class="aspect-square rounded bg-primary/40"></div>
+<div class="aspect-square rounded bg-primary/90"></div>
+<div class="aspect-square rounded bg-primary/10"></div>
+<div class="aspect-square rounded bg-slate-100 dark:bg-slate-800"></div>
+<div class="aspect-square rounded bg-slate-100 dark:bg-slate-800"></div>
+<div class="aspect-square rounded bg-primary/60"></div>
+<div class="aspect-square rounded bg-primary/80"></div>
+<div class="aspect-square rounded bg-primary/100"></div>
+<div class="aspect-square rounded bg-primary/100"></div>
+<div class="aspect-square rounded bg-primary/90"></div>
+<div class="aspect-square rounded bg-slate-100 dark:bg-slate-800"></div>
+<div class="aspect-square rounded bg-slate-100 dark:bg-slate-800"></div>
+</div>
+<div class="mt-6 flex items-center justify-end gap-2">
+<span class="text-[10px] text-slate-500">Less</span>
+<div class="flex gap-1">
+<div class="size-3 rounded bg-primary/10"></div>
+<div class="size-3 rounded bg-primary/30"></div>
+<div class="size-3 rounded bg-primary/60"></div>
+<div class="size-3 rounded bg-primary/100"></div>
+</div>
+<span class="text-[10px] text-slate-500">More</span>
+</div>
+</div>
+<!-- Student Leaderboard -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Student Ranking Leaderboard</h3>
+<div class="text-xs font-medium px-2 py-1 bg-primary/10 text-primary rounded-lg">Top 100 Students</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead>
+<tr class="text-left text-xs font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 dark:border-slate-800">
+<th class="pb-3 pl-2">Rank</th>
+<th class="pb-3">Student</th>
+<th class="pb-3 text-center">GPA</th>
+<th class="pb-3 text-right pr-2">Attendance</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="py-4 pl-2 font-bold text-slate-900 dark:text-white text-sm">#1</td>
+<td class="py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full border-2 border-primary/40 p-0.5">
+<img class="w-full h-full rounded-full object-cover" data-alt="Student profile picture avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8PNc2AUz08Tt6Hidq2CK81jEOAR6U3uKOMK3QyDgCv8ffNVyLnWSNv3vdpP4EPOvVYzSLRVOUPgeJm75qKpszMcABAOPH1FnNY11WVwhMKGQKlcVdtXBu9ock-A_EbWCiH9OTMT8U6XRaiAKnZtwO5DPiz6B-A7sFMsJKFqDm35CbMJTLLsE21D4xsMh8LPHNBFH9wpiZMhGGseFcwPtDn3loUlz3vU4VJDp-jAbP47wTqxGYioUe_a2vPkI-GQNHOV7FyWpiLeIa"/>
+</div>
+<span class="text-sm font-semibold">Emily Watson</span>
+</div>
+</td>
+<td class="py-4 text-center">
+<span class="text-sm font-bold bg-green-50 dark:bg-green-900/20 text-green-600 px-2 py-1 rounded">3.98</span>
+</td>
+<td class="py-4 text-right pr-2">
+<span class="text-sm font-bold text-slate-900 dark:text-white">100%</span>
+</td>
+</tr>
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="py-4 pl-2 font-bold text-slate-900 dark:text-white text-sm">#2</td>
+<td class="py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full border-2 border-primary/20 p-0.5">
+<img class="w-full h-full rounded-full object-cover" data-alt="Student profile picture avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvHzp2reWZA7zSYFQWiQoKBZpEKLt3zURrggctr5h92P6OhPRDKp0YF07VWNgydXH6ncmmwezKBVDRTbvteD-AwsuVasA1jAdMDz8dvXJKsE22x7P81D83GgDj5CsP8ibC9aAR949aM0SxXFJcefelqUJyiMzqixzxMND85DyoPeUoQ84pLo6EJBJcWAu03G5Mu6lSnCuYbHnnyn_p3DFx_wTlX3FWYSj3Jo474Ve9Bus5sVTFznxTfZKX_9lscqDHNRjFtENqTAvo"/>
+</div>
+<span class="text-sm font-semibold">Kevin Durant</span>
+</div>
+</td>
+<td class="py-4 text-center">
+<span class="text-sm font-bold bg-green-50 dark:bg-green-900/20 text-green-600 px-2 py-1 rounded">3.95</span>
+</td>
+<td class="py-4 text-right pr-2">
+<span class="text-sm font-bold text-slate-900 dark:text-white">99.2%</span>
+</td>
+</tr>
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="py-4 pl-2 font-bold text-slate-900 dark:text-white text-sm">#3</td>
+<td class="py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full border-2 border-primary/10 p-0.5">
+<img class="w-full h-full rounded-full object-cover" data-alt="Student profile picture avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoOGacvrY5ZeMj9coPDVrm_ox6a_75a7FHjzwq0s6IWAVB7GAjGeXu4RkaKevutkV6ZNDIbdSP41BoI-XvIpEGHVIurofvp6QiXaDSR4ysSkBxiVY8E1EhSyeCj3ikKWsWeWZg0VLYyxh53RefZaq5ziIjCrlIa1amGQTaSnqpmSUxLgWTrNc66SkKqPbcj5vC0rULPskO_Fds8deNVhpFvR9MCJoXGokFlZgi8Njv9r003otl3GpkZcgANWM3dIKOWWSP7lJiKSIC"/>
+</div>
+<span class="text-sm font-semibold">Alex Chen</span>
+</div>
+</td>
+<td class="py-4 text-center">
+<span class="text-sm font-bold bg-green-50 dark:bg-green-900/20 text-green-600 px-2 py-1 rounded">3.88</span>
+</td>
+<td class="py-4 text-right pr-2">
+<span class="text-sm font-bold text-slate-900 dark:text-white">98.5%</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<button class="w-full py-3 mt-4 text-sm font-bold text-slate-500 dark:text-slate-400 hover:text-primary transition-colors border-t border-slate-100 dark:border-slate-800">
+                        View Full Leaderboard
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -3,18 +3,39 @@
 // to simulate chart libraries without dependencies.
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Check if we have an attendance chart canvas
     const attendanceCanvas = document.getElementById('attendanceChart');
+    const engagementCanvas = document.getElementById('engagementChart');
+
     if (attendanceCanvas) {
-        drawBarChart(attendanceCanvas, [85, 92, 78, 95, 88], ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']);
+        setupResponsiveChart(attendanceCanvas, drawBarChart, [85, 92, 78, 95, 88], ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']);
     }
 
-    // Check if we have an engagement chart canvas
-    const engagementCanvas = document.getElementById('engagementChart');
     if (engagementCanvas) {
-        drawLineChart(engagementCanvas, [60, 65, 80, 75, 90, 85, 95], ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7']);
+        setupResponsiveChart(engagementCanvas, drawLineChart, [60, 65, 80, 75, 90, 85, 95], ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7']);
     }
 });
+
+function setupResponsiveChart(canvas, drawFn, data, labels) {
+    const container = canvas.parentElement;
+    
+    const resizeAndDraw = () => {
+        const rect = container.getBoundingClientRect();
+        if(rect.width === 0) return; // Prevent drawing if hidden
+        // Match internal resolution to actual size
+        canvas.width = rect.width;
+        canvas.height = rect.height || 300;
+        drawFn(canvas, data, labels);
+    };
+
+    // Initial draw
+    resizeAndDraw();
+
+    // Redraw on resize
+    const observer = new ResizeObserver(() => {
+        resizeAndDraw();
+    });
+    observer.observe(container);
+}
 
 function drawBarChart(canvas, data, labels) {
     const ctx = canvas.getContext('2d');

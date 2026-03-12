@@ -266,9 +266,22 @@
 /* Stat Cards */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 24px;
+    grid-template-columns: 1fr;
+    gap: 16px;
     margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 .stat-card {
@@ -326,9 +339,16 @@
 /* Charts Section */
 .charts-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 24px;
+    grid-template-columns: 1fr;
+    gap: 16px;
     margin-bottom: 32px;
+}
+
+@media (min-width: 1025px) {
+    .charts-grid {
+        grid-template-columns: 2fr 1fr;
+        gap: 24px;
+    }
 }
 
 .chart-card {
@@ -441,15 +461,10 @@ canvas {
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
-    .charts-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 @media (max-width: 768px) {
     .sidebar {
         transform: translateX(-100%);
+        width: 280px; /* slightly wider for mobile comfort */
     }
 
     .sidebar.active {
@@ -474,12 +489,20 @@ canvas {
     }
 
     .content-wrapper {
-        padding: 20px;
+        padding: 16px;
     }
 
     .page-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
+    }
+    
+    .nav-right {
+        gap: 8px; /* tighter spacing */
+    }
+    
+    .top-navbar {
+        padding: 0 16px;
     }
 }

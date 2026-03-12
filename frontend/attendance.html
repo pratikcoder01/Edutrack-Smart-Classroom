@@ -10,8 +10,15 @@
     <style>
         .scanner-container {
             display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 24px;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        
+        @media (min-width: 1025px) {
+            .scanner-container {
+                grid-template-columns: 1fr 350px;
+                gap: 24px;
+            }
         }
 
         .camera-card {
@@ -97,11 +104,7 @@
             margin-bottom: 16px;
         }
 
-        @media (max-width: 1024px) {
-            .scanner-container {
-                grid-template-columns: 1fr;
-            }
-        }
+
     </style>
 </head>
 <body>

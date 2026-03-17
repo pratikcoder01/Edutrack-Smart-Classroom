@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Set New Password - EduTrack</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5048e5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 px-6 lg:px-40 py-5 bg-white dark:bg-slate-900">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 flex items-center justify-center bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary text-2xl">school</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight">EduTrack</h2>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-sm text-slate-500 hidden sm:block">Step 2 of 2</span>
+</div>
+</header>
+<main class="flex-1 flex items-center justify-center p-6 sm:p-12">
+<div class="w-full max-w-md bg-white dark:bg-slate-900 p-8 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="mb-8 text-center sm:text-left">
+<h1 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">Set new password</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm">
+                            Your new password must be different from previously used passwords.
+                        </p>
+</div>
+<form action="#" class="space-y-6" method="POST">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" for="new-password">
+                                New Password
+                            </label>
+<div class="relative flex items-stretch rounded-lg group">
+<input class="form-input block w-full rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary focus:ring-primary text-slate-900 dark:text-white h-12 pr-12 transition-all" id="new-password" name="new-password" placeholder="Enter new password" type="password"/>
+<button class="absolute right-0 top-0 h-full px-3 flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" for="confirm-password">
+                                Confirm New Password
+                            </label>
+<div class="relative flex items-stretch rounded-lg group">
+<input class="form-input block w-full rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary focus:ring-primary text-slate-900 dark:text-white h-12 pr-12 transition-all" id="confirm-password" name="confirm-password" placeholder="Confirm your new password" type="password"/>
+<button class="absolute right-0 top-0 h-full px-3 flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg space-y-3">
+<p class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Password requirements</p>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-[18px] text-emerald-500">check_circle</span>
+                                    At least 8 characters
+                                </li>
+<li class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-[18px] text-slate-300">circle</span>
+                                    At least one uppercase letter
+                                </li>
+<li class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-[18px] text-slate-300">circle</span>
+                                    At least one number or symbol
+                                </li>
+</ul>
+</div>
+<div class="pt-2">
+<button class="w-full h-12 bg-primary hover:bg-primary/90 text-white font-bold rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2" type="submit">
+                                Reset password
+                            </button>
+</div>
+</form>
+<div class="mt-8 text-center">
+<a class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors" href="/login">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                            Back to login
+                        </a>
+</div>
+</div>
+</main>
+<footer class="px-6 lg:px-40 py-8 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+<p>© 2024 EduTrack Platform. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-slate-600 dark:hover:text-slate-200" href="#">Privacy Policy</a>
+<a class="hover:text-slate-600 dark:hover:text-slate-200" href="#">Terms of Service</a>
+<a class="hover:text-slate-600 dark:hover:text-slate-200" href="#">Support</a>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

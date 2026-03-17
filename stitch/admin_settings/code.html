@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EduTrack Admin Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4F46E5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary rounded-lg p-1.5 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-2xl">school</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">EduTrack</h1>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-sm font-medium">Analytics</span>
+</a>
+<div class="pt-4 pb-2">
+<p class="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Administration</p>
+</div>
+<a class="flex items-center gap-3 px-3 py-2 text-primary bg-primary/10 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Students</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2">
+<div class="h-9 w-9 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<img alt="Admin Profile" data-alt="User profile avatar placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxs0zrCIjoZ0JPbdaYkz7B_NAQTE7RhZf7IwnOy4aBRjs31EkBYJrlRmokIJCxf0TrZQoEyGCd83upFspx32kcrQWfql-3UdLw00STEVv7q8wfBaa9znC12evxddyBE2PEagICiyfwTgysGVRxzP5RYd_vDNcnTZ02VWOqv3fRCtoa32XWooyCams8dw1EmIRZktk0F5_MDhClm0yaoYes4mNdN2w0zXHGrJkkgl7V3g5px82zVdGTvoQMgbiHtjaIZ3MzDSmPqXFu"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Alex Rivera</p>
+<p class="text-xs text-slate-500 truncate">Super Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-y-auto bg-white dark:bg-slate-950">
+<!-- Top Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 shrink-0">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="w-full pl-10 pr-4 py-1.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Search settings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</header>
+<!-- Settings Layout -->
+<div class="flex-1 flex">
+<!-- Vertical Settings Nav -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 p-6 space-y-1 bg-slate-50/50 dark:bg-slate-900/20">
+<h2 class="text-lg font-bold mb-6">Settings</h2>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-white dark:bg-slate-800 shadow-sm border border-slate-200 dark:border-slate-700 text-primary" href="#">
+<span class="material-symbols-outlined text-xl">person</span>
+<span class="text-sm font-semibold">Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">account_balance</span>
+<span class="text-sm font-medium">School Info</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">psychology</span>
+<span class="text-sm font-medium">AI Sensitivity</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">manage_accounts</span>
+<span class="text-sm font-medium">User Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">vpn_key</span>
+<span class="text-sm font-medium">API Keys</span>
+</a>
+</aside>
+<!-- Settings Viewport -->
+<div class="flex-1 p-10 max-w-4xl">
+<div class="mb-8">
+<h3 class="text-2xl font-bold">Profile Information</h3>
+<p class="text-slate-500 mt-1">Update your personal details and how others see you on the platform.</p>
+</div>
+<div class="space-y-8">
+<!-- Profile Image Section -->
+<div class="flex items-center gap-8 pb-8 border-b border-slate-100 dark:border-slate-800">
+<div class="relative group">
+<div class="w-24 h-24 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center overflow-hidden border-4 border-white dark:border-slate-900 shadow-lg">
+<img alt="Avatar" data-alt="Current user high resolution profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMcxpv3CioKDOmChI8AfD_V6-H01kd_PdJyJJ0w5Kw-R9fE7P9eH3tWwkRcvwmEVdRdLOoBKn0W0dMjzurtzoxr6ei16u32ex6LpLRibUDmbzj4sU46SXHcnIhjU59TnBSHsA6CbbDiO9omyMANH9fVdAvt1JwmGX7t9wNIpMExxlziK_FqyFU890jvIHjBPgFI9YN3ReYY2jC4k8fmA8XDFhjRUROA4ZvlNaSoRw-VFiYnavI7bwSdQ2LSmKXCkQtMp8NGjmSSWI-"/>
+</div>
+<button class="absolute bottom-0 right-0 bg-primary text-white p-1.5 rounded-full shadow-md border-2 border-white dark:border-slate-900 flex">
+<span class="material-symbols-outlined text-sm">photo_camera</span>
+</button>
+</div>
+<div>
+<h4 class="font-semibold mb-2">Profile Photo</h4>
+<div class="flex gap-3">
+<button class="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">Change photo</button>
+<button class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium rounded-lg hover:bg-slate-50 transition-colors">Remove</button>
+</div>
+<p class="text-xs text-slate-400 mt-2">JPG, GIF or PNG. Max size of 800K.</p>
+</div>
+</div>
+<!-- Form Section -->
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">First Name</label>
+<input class="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-transparent transition-all" type="text" value="Alex"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Last Name</label>
+<input class="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-transparent transition-all" type="text" value="Rivera"/>
+</div>
+<div class="col-span-2 space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">mail</span>
+<input class="w-full pl-10 pr-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-transparent transition-all" type="email" value="alex.rivera@edutrack.io"/>
+</div>
+</div>
+<div class="col-span-2 space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Biography</label>
+<textarea class="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Tell us a little about your role..." rows="4"></textarea>
+</div>
+</div>
+<!-- Preferences Section -->
+<div class="pt-8 border-t border-slate-100 dark:border-slate-800">
+<h4 class="font-bold text-lg mb-4">Regional Preferences</h4>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-white dark:bg-slate-800 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-primary">language</span>
+</div>
+<div>
+<p class="text-sm font-semibold">Language</p>
+<p class="text-xs text-slate-500">English (United States)</p>
+</div>
+</div>
+<button class="text-primary text-sm font-bold hover:underline">Change</button>
+</div>
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-white dark:bg-slate-800 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-primary">schedule</span>
+</div>
+<div>
+<p class="text-sm font-semibold">Timezone</p>
+<p class="text-xs text-slate-500">Pacific Standard Time (PST) UTC-8</p>
+</div>
+</div>
+<button class="text-primary text-sm font-bold hover:underline">Change</button>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center justify-end gap-3 pt-6">
+<button class="px-6 py-2.5 text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Cancel</button>
+<button class="px-8 py-2.5 bg-primary text-white text-sm font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">Save Changes</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

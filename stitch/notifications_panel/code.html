@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4F46E5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>EduTrack Notifications</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-3 lg:px-10">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 flex items-center justify-center bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary text-2xl">school</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em]">EduTrack</h2>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<label class="hidden md:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-slate-500 flex border-none bg-slate-100 dark:bg-slate-800 items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-slate-100 focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-slate-800 focus:border-none h-full placeholder:text-slate-500 px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal" placeholder="Search" value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-primary/10 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-primary/10 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" data-alt="User profile avatar with professional look" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAJ4DTYRRRnHCww9lztysiNH1yV0MrRH4nl8QOnskYE5eONNZpd_LY1WfN-k10xsgkF5st2_o4hC-ILaEQ9BK1Mfpj-dfylD69G9zw-8HzYJUXNqrFrxmEh9zqJflUV_sBZtAaYzmqjsHU4CfbuMRbqiSppseYDZXWWaeBoLcNVamsrVeo1RnE29CixRwndQewDIb3W9--iyD8WWOD4wYo109GuNaFesCE0-Aoj4u9J5wfR-Xdnw0aoNNzPgL4A8dQ7ivpsjtFPq7NO");'></div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar -->
+<aside class="hidden lg:flex flex-col w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-4 shrink-0">
+<div class="flex flex-col gap-6">
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-slate-100 text-base font-bold">Educator Portal</h1>
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider mt-1">Main Menu</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<p class="text-sm font-medium">Students</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<p class="text-sm font-medium">Courses</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary border border-primary/20" href="#">
+<span class="material-symbols-outlined text-primary fill-1">notifications</span>
+<p class="text-sm font-bold">Notifications</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</a>
+</nav>
+</div>
+</aside>
+<!-- Main Content: Notifications Panel -->
+<main class="flex-1 overflow-y-auto p-4 md:p-8">
+<div class="max-w-4xl mx-auto space-y-6">
+<!-- Header Actions -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="space-y-1">
+<h2 class="text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight">Notifications</h2>
+<p class="text-slate-500 text-sm">Stay updated with AI insights and student progress</p>
+</div>
+<button class="flex items-center justify-center gap-2 px-4 h-10 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-300 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-lg">done_all</span>
+<span>Mark all as read</span>
+</button>
+</div>
+<!-- Filters -->
+<div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+<button class="h-9 px-5 rounded-full bg-primary text-white text-sm font-semibold shadow-md shadow-primary/20 whitespace-nowrap">
+                            All
+                        </button>
+<button class="h-9 px-5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 text-sm font-semibold hover:border-primary/40 hover:text-primary transition-all whitespace-nowrap">
+                            AI Alerts
+                        </button>
+<button class="h-9 px-5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 text-sm font-semibold hover:border-primary/40 hover:text-primary transition-all whitespace-nowrap">
+                            System
+                        </button>
+<button class="h-9 px-5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 text-sm font-semibold hover:border-primary/40 hover:text-primary transition-all whitespace-nowrap">
+                            Student Updates
+                        </button>
+</div>
+<!-- Notification List -->
+<div class="flex flex-col gap-3">
+<!-- AI Alert Item (Unread) -->
+<div class="flex items-start gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border-l-4 border-primary shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-lg">close</span></button>
+</div>
+<div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">psychology</span>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex items-center justify-between">
+<h3 class="text-slate-900 dark:text-white font-bold text-base leading-tight">AI Insight: Student Engagement Drop</h3>
+<span class="text-xs font-medium text-slate-400">2m ago</span>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Neural patterns suggest Grade 10-B needs a review session on "Organic Chemistry Fundamentals". Engagement fell by 15% this week.</p>
+<div class="pt-2 flex gap-3">
+<button class="text-primary text-xs font-bold hover:underline">View Analytics</button>
+<button class="text-slate-500 text-xs font-bold hover:underline">Schedule Review</button>
+</div>
+</div>
+</div>
+<!-- Student Update Item -->
+<div class="flex items-start gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow group">
+<div class="size-12 rounded-xl bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-amber-600">person</span>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex items-center justify-between">
+<h3 class="text-slate-900 dark:text-white font-bold text-base leading-tight">Student Submission: Marcus V.</h3>
+<span class="text-xs font-medium text-slate-400">45m ago</span>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Marcus has submitted the "Historical Context of Modern Art" essay for review. This is his final project submission.</p>
+<div class="pt-2">
+<button class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs px-3 py-1.5 rounded-lg font-bold hover:bg-primary/10 hover:text-primary transition-colors">Review Submission</button>
+</div>
+</div>
+</div>
+<!-- System Notification -->
+<div class="flex items-start gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow group">
+<div class="size-12 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400">update</span>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex items-center justify-between">
+<h3 class="text-slate-900 dark:text-white font-bold text-base leading-tight">System Update Complete</h3>
+<span class="text-xs font-medium text-slate-400">3h ago</span>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">EduTrack has been updated to v2.4.1. New features include improved AI grading and dark mode stability fixes.</p>
+<div class="pt-2">
+<button class="text-primary text-xs font-bold hover:underline">Read Release Notes</button>
+</div>
+</div>
+</div>
+<!-- AI Alert (Read) -->
+<div class="flex items-start gap-4 bg-white/60 dark:bg-slate-900/60 p-4 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm opacity-80">
+<div class="size-12 rounded-xl bg-primary/5 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary/60">bolt</span>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex items-center justify-between">
+<h3 class="text-slate-500 dark:text-slate-400 font-bold text-base leading-tight">AI Recommendation: Sarah Jenkins</h3>
+<span class="text-xs font-medium text-slate-400">Yesterday</span>
+</div>
+<p class="text-slate-500 dark:text-slate-500 text-sm leading-relaxed">Based on current trajectory, Sarah is ready for Advanced Placement Mathematics. Recommended action: Invite to AP Program.</p>
+</div>
+</div>
+<!-- Student Update (Read) -->
+<div class="flex items-start gap-4 bg-white/60 dark:bg-slate-900/60 p-4 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm opacity-80">
+<div class="size-12 rounded-xl bg-slate-50 dark:bg-slate-800/50 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-slate-400">assignment_turned_in</span>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex items-center justify-between">
+<h3 class="text-slate-500 dark:text-slate-400 font-bold text-base leading-tight">Assignment Graded: Physics 101</h3>
+<span class="text-xs font-medium text-slate-400">2 days ago</span>
+</div>
+<p class="text-slate-500 dark:text-slate-500 text-sm leading-relaxed">All 28 submissions for "Newtonian Dynamics" have been processed and grades released to students.</p>
+</div>
+</div>
+</div>
+<!-- Footer / Load More -->
+<div class="flex justify-center pt-4">
+<button class="px-6 py-2 text-slate-500 dark:text-slate-400 text-sm font-semibold hover:text-primary transition-colors flex items-center gap-2">
+<span>View older notifications</span>
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</body></html>

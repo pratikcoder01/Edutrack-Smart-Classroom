@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EduTrack - Classroom Monitor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4F46E5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .active-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen w-full flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl font-bold">school</span>
+<h2 class="text-slate-900 dark:text-white text-xl font-extrabold leading-tight tracking-tight">EduTrack</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 text-sm font-semibold hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-semibold border-b-2 border-primary pb-1" href="#">Classrooms</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-semibold hover:text-primary transition-colors" href="#">Analytics</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-semibold hover:text-primary transition-colors" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="w-64 rounded-lg border-none bg-slate-100 dark:bg-slate-800 pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50" placeholder="Search classrooms..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+<div class="h-9 w-9 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden border-2 border-primary/10">
+<img class="object-cover h-full w-full" data-alt="User profile avatar icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANpzrQlw9JV1rPh_tLn9UC92zKTqbL_SYVjUYGWduQejLYfEZtSFz3P94LoQ7eLqV_dnjMhePlJ3nJj_xRZs9JmZ29jpyuW8X_dQmDimNy7I4gglQM3HekFLgERPVvcOzreCPJ0at-g1SDX5ikRtpitzBzF8So3f3PQKkFqtQHYxJyeBji6-mp1GplIMvzyxo-EOI5lS26oZvlyVrHvOwgjIOHWSqeEZzZ0HjQ13rM1fPo12eguWmSbSa-F6OLSYaO1RG9seqbGy6G"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hidden lg:flex flex-col p-4 shrink-0">
+<div class="flex flex-col gap-1 flex-1">
+<div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 px-3">Main Menu</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary group transition-all" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary text-white shadow-lg shadow-primary/20 transition-all" href="#">
+<span class="material-symbols-outlined active-icon">videocam</span>
+<span class="text-sm font-medium">Classroom Monitor</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Student Directory</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-sm font-medium">Weekly Schedule</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">equalizer</span>
+<span class="text-sm font-medium">Attendance Reports</span>
+</a>
+<div class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-6 mb-2 px-3">Faculty Tools</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="text-sm font-medium">Curriculum Planner</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">mail</span>
+<span class="text-sm font-medium">Communications</span>
+</a>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800">
+<button class="w-full bg-primary hover:bg-primary/90 text-white rounded-xl py-3 px-4 font-bold text-sm flex items-center justify-center gap-2 transition-all">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                    Add Classroom
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-slate-50 dark:bg-background-dark">
+<!-- Content Header -->
+<div class="p-6 md:p-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<nav class="flex items-center gap-2 text-xs font-medium text-slate-400 mb-2">
+<span>Admin</span>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span class="text-primary">Monitor</span>
+</nav>
+<h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Classroom Monitor</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Real-time status and live occupancy across campus.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-sm hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined text-lg">sync</span>
+                            Refresh Feeds
+                        </button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-all shadow-md">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                            Filter View
+                        </button>
+</div>
+</div>
+<!-- Stats Overview -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-xs font-bold text-slate-400 uppercase">Active Sessions</p>
+<h3 class="text-2xl font-black text-slate-900 dark:text-white mt-1">24</h3>
+</div>
+<div class="h-10 w-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center text-green-600">
+<span class="material-symbols-outlined">play_circle</span>
+</div>
+</div>
+<div class="mt-3 flex items-center gap-1 text-xs text-green-600 font-bold">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>+4 from last hour</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-xs font-bold text-slate-400 uppercase">Avg Attendance</p>
+<h3 class="text-2xl font-black text-slate-900 dark:text-white mt-1">92.4%</h3>
+</div>
+<div class="h-10 w-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined">person_check</span>
+</div>
+</div>
+<div class="mt-3 flex items-center gap-1 text-xs text-blue-600 font-bold">
+<span class="material-symbols-outlined text-[14px]">remove</span>
+<span>Stable vs. yesterday</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-xs font-bold text-slate-400 uppercase">Alerts Found</p>
+<h3 class="text-2xl font-black text-slate-900 dark:text-white mt-1">3</h3>
+</div>
+<div class="h-10 w-10 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center text-orange-600">
+<span class="material-symbols-outlined">warning</span>
+</div>
+</div>
+<div class="mt-3 flex items-center gap-1 text-xs text-orange-600 font-bold">
+<span class="material-symbols-outlined text-[14px]">error</span>
+<span>2 high absenteeism</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-xs font-bold text-slate-400 uppercase">Next Change</p>
+<h3 class="text-2xl font-black text-slate-900 dark:text-white mt-1">12:00 PM</h3>
+</div>
+<div class="h-10 w-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center text-purple-600">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+</div>
+<div class="mt-3 flex items-center gap-1 text-xs text-purple-600 font-bold">
+<span class="material-symbols-outlined text-[14px]">info</span>
+<span>End of session block</span>
+</div>
+</div>
+</div>
+<!-- Feed Grid Section -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            Active Feeds
+                            <span class="px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-[10px] font-bold text-slate-600 dark:text-slate-400 uppercase">Live Now</span>
+</h2>
+<div class="flex items-center gap-2">
+<button class="p-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined text-xl">view_module</span>
+</button>
+<button class="p-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined text-xl">view_list</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Feed Card 1 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300">
+<div class="relative aspect-video overflow-hidden">
+<div class="absolute inset-0 bg-slate-200 animate-pulse flex items-center justify-center" data-alt="Abstract colorful classroom environment pattern" style="background-image: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);">
+<span class="material-symbols-outlined text-white/50 text-5xl">videocam</span>
+</div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="flex items-center gap-1.5 px-2 py-1 rounded bg-black/60 text-white text-[10px] font-bold uppercase backdrop-blur-sm">
+<span class="h-2 w-2 rounded-full bg-red-500 animate-ping"></span>
+                                        Live
+                                    </span>
+<span class="px-2 py-1 rounded bg-black/60 text-white text-[10px] font-bold uppercase backdrop-blur-sm">4K HD</span>
+</div>
+<div class="absolute bottom-3 right-3">
+<button class="h-8 w-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white/40">
+<span class="material-symbols-outlined text-xl">fullscreen</span>
+</button>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Room 101 - Biology</h4>
+<p class="text-xs text-slate-500">Instructor: Prof. Sarah Jenkins</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-black text-slate-900 dark:text-white">28/30</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase">Attendance</p>
+</div>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden mb-4">
+<div class="bg-primary h-full w-[93%]" role="progressbar"></div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-800">
+<div class="flex -space-x-2">
+<div class="h-6 w-6 rounded-full border-2 border-white dark:border-slate-900 bg-slate-300" data-alt="Student avatar placeholder 1" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBti0r4wFSGCa8eAqCqxiXrA3Lm9CjfhpgYIO3uNHrHYNNG9lFJWdPPYnpezpWHBI2s1-pEv8QzROaV-X3sQXV4vUd9DmAegu8cph29RVQjyI79F7Tf-Mj3wiPcjYelZ6GTNKi7mTAfbUTs4Jl1jh0QW69mwSFFxcmCFSlapidjekBpFT3hSindOzbWDtVLXBEpO6j2lB3VgOd_G6ERCiniA96ztEf-fAi4XcCjA2IANBXs9GA475k6WrBPFtsBLc4s34qvkVeFTDL9');"></div>
+<div class="h-6 w-6 rounded-full border-2 border-white dark:border-slate-900 bg-slate-300" data-alt="Student avatar placeholder 2" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDbkfY8uXp2me64agjnAQtxfc9XEas8U7bEJfQDkEs9UxhtvG96Z1zaSyQENAQAmaODiTP3GB4IkvRj_0DVB2TmxGaZmzKkdfw7gB-szab8r6LWFXqITi7ZjTgiXQ4_gRYpnlOfN2KaRtEKZUu7u_eC32jKY-vTS3X6OPEfghfGaqkqDtfBKPdT32Yua-ROpq_puHZHHd1ylIbhCm84E_PC3lqwAdx2NvWFOQl7C9j_Sf4hQ0Kf4ICUpWPH9HiqX8IGphh6409l5QV7');"></div>
+<div class="h-6 w-6 rounded-full border-2 border-white dark:border-slate-900 bg-slate-300 flex items-center justify-center bg-slate-100 text-[8px] font-bold">+25</div>
+</div>
+<button class="text-primary text-xs font-bold hover:underline">View Logs</button>
+</div>
+</div>
+</div>
+<!-- Feed Card 2 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300">
+<div class="relative aspect-video overflow-hidden">
+<div class="absolute inset-0 bg-slate-200 animate-pulse flex items-center justify-center" data-alt="Abstract colorful classroom environment pattern blue green" style="background-image: linear-gradient(135deg, #10B981 0%, #059669 100%);">
+<span class="material-symbols-outlined text-white/50 text-5xl">videocam</span>
+</div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="flex items-center gap-1.5 px-2 py-1 rounded bg-black/60 text-white text-[10px] font-bold uppercase backdrop-blur-sm">
+<span class="h-2 w-2 rounded-full bg-red-500 animate-ping"></span>
+                                        Live
+                                    </span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Lab 04 - Chemistry</h4>
+<p class="text-xs text-slate-500">Instructor: Dr. Michael Chen</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-black text-slate-900 dark:text-white">12/12</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase">Attendance</p>
+</div>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden mb-4">
+<div class="bg-green-500 h-full w-[100%]" role="progressbar"></div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-800">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-green-500 text-sm active-icon">verified</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Capacity Reached</span>
+</div>
+<button class="text-primary text-xs font-bold hover:underline">View Logs</button>
+</div>
+</div>
+</div>
+<!-- Feed Card 3 (Alert) -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border-2 border-orange-500/20 overflow-hidden shadow-sm hover:shadow-xl hover:border-orange-500/50 transition-all duration-300">
+<div class="relative aspect-video overflow-hidden">
+<div class="absolute inset-0 bg-slate-200 animate-pulse flex items-center justify-center" data-alt="Abstract colorful classroom environment pattern orange red" style="background-image: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);">
+<span class="material-symbols-outlined text-white/50 text-5xl">videocam</span>
+</div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="flex items-center gap-1.5 px-2 py-1 rounded bg-orange-600 text-white text-[10px] font-bold uppercase">
+<span class="material-symbols-outlined text-xs">warning</span>
+                                        Alert
+                                    </span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Auditorium - Stats 101</h4>
+<p class="text-xs text-slate-500">Instructor: Prof. Lee</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-black text-orange-600">82/150</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase">Attendance</p>
+</div>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden mb-4">
+<div class="bg-orange-500 h-full w-[54%]" role="progressbar"></div>
+</div>
+<div class="bg-orange-50 dark:bg-orange-900/10 p-2 rounded-lg mb-4 flex gap-2">
+<span class="material-symbols-outlined text-orange-600 text-sm">info</span>
+<p class="text-[10px] text-orange-700 dark:text-orange-400 leading-tight">Attendance dropped below 60% threshold. Notification sent to faculty.</p>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-800">
+<div class="flex items-center gap-2">
+<button class="px-2 py-1 rounded bg-orange-100 text-orange-700 text-[10px] font-bold uppercase hover:bg-orange-200">Acknowledge</button>
+</div>
+<button class="text-primary text-xs font-bold hover:underline">View Logs</button>
+</div>
+</div>
+</div>
+<!-- Feed Card 4 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300">
+<div class="relative aspect-video overflow-hidden">
+<div class="absolute inset-0 bg-slate-200 animate-pulse flex items-center justify-center" data-alt="Abstract colorful classroom environment pattern indigo" style="background-image: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);">
+<span class="material-symbols-outlined text-white/50 text-5xl">videocam</span>
+</div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="flex items-center gap-1.5 px-2 py-1 rounded bg-black/60 text-white text-[10px] font-bold uppercase backdrop-blur-sm">
+<span class="h-2 w-2 rounded-full bg-red-500 animate-ping"></span>
+                                        Live
+                                    </span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Studio 2 - Digital Arts</h4>
+<p class="text-xs text-slate-500">Instructor: Mx. Rivera</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-black text-slate-900 dark:text-white">18/20</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase">Attendance</p>
+</div>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden mb-4">
+<div class="bg-primary h-full w-[90%]" role="progressbar"></div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-800">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-blue-500 text-sm active-icon">timer</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase">34m remaining</span>
+</div>
+<button class="text-primary text-xs font-bold hover:underline">View Logs</button>
+</div>
+</div>
+</div>
+<!-- Feed Card 5 (Idle) -->
+<div class="group bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm opacity-80">
+<div class="relative aspect-video overflow-hidden bg-slate-300 dark:bg-slate-800 flex flex-col items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-5xl">videocam_off</span>
+<p class="text-xs font-bold text-slate-500 mt-2 uppercase tracking-widest">Feed Offline</p>
+<div class="absolute top-3 left-3">
+<span class="px-2 py-1 rounded bg-slate-500 text-white text-[10px] font-bold uppercase">Scheduled</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-bold text-slate-500 dark:text-slate-400">Room 305 - Physics II</h4>
+<p class="text-xs text-slate-400">Instructor: Dr. Harrison</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-black text-slate-400">--/35</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase">Attendance</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-[10px] font-bold uppercase">Starts at 1:30 PM</span>
+</div>
+<button class="text-slate-400 text-xs font-bold cursor-not-allowed">Details</button>
+</div>
+</div>
+</div>
+<!-- Feed Card 6 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300">
+<div class="relative aspect-video overflow-hidden">
+<div class="absolute inset-0 bg-slate-200 animate-pulse flex items-center justify-center" data-alt="Abstract colorful classroom environment pattern pink purple" style="background-image: linear-gradient(135deg, #EC4899 0%, #DB2777 100%);">
+<span class="material-symbols-outlined text-white/50 text-5xl">videocam</span>
+</div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="flex items-center gap-1.5 px-2 py-1 rounded bg-black/60 text-white text-[10px] font-bold uppercase backdrop-blur-sm">
+<span class="h-2 w-2 rounded-full bg-red-500 animate-ping"></span>
+                                        Live
+                                    </span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Lab 02 - Microbio</h4>
+<p class="text-xs text-slate-500">Instructor: Prof. Gupta</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-black text-slate-900 dark:text-white">15/15</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase">Attendance</p>
+</div>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden mb-4">
+<div class="bg-green-500 h-full w-[100%]" role="progressbar"></div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-800">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-green-500 text-sm active-icon">verified</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Waitlist Active</span>
+</div>
+<button class="text-primary text-xs font-bold hover:underline">View Logs</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer / Status Bar -->
+<div class="mt-12 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-medium text-slate-400 pt-6 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-green-500"></span> System Operational</span>
+<span class="flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-blue-500"></span> Feed Latency: 42ms</span>
+</div>
+<div>
+                        © 2024 EduTrack Professional. All classrooms encrypted with AES-256.
+                    </div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

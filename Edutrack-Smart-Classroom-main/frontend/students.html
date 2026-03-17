@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Database - EduTrack SaaS</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Icons (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Firebase JS SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+</head>
+<body class="bg-slate-50 flex h-screen overflow-hidden antialiased">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col shadow-sm relative z-20">
+        <!-- Logo Area -->
+        <div class="h-16 flex items-center px-6 border-b border-slate-100 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center mr-3 shadow-md">
+                <i data-lucide="cpu" class="w-4 h-4 text-white"></i>
+            </div>
+            <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-indigo-700">EduTrack</span>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center px-3 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-lg group transition-colors font-medium">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3 text-slate-400 group-hover:text-slate-600"></i>
+                Dashboard
+            </a>
+            <a href="scanner.html" class="flex items-center px-3 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-lg group transition-colors font-medium">
+                <i data-lucide="scan-line" class="w-5 h-5 mr-3 text-slate-400 group-hover:text-slate-600"></i>
+                Live Scanner
+            </a>
+            <a href="students.html" class="flex items-center px-3 py-2.5 bg-blue-50 text-blue-700 rounded-lg group transition-colors font-medium">
+                <i data-lucide="users" class="w-5 h-5 mr-3 text-blue-600"></i>
+                Students
+            </a>
+            <a href="records.html" class="flex items-center px-3 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-lg group transition-colors font-medium">
+                <i data-lucide="clipboard-list" class="w-5 h-5 mr-3 text-slate-400 group-hover:text-slate-600"></i>
+                Attendance Records
+            </a>
+            <a href="analytics.html" class="flex items-center px-3 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-lg group transition-colors font-medium">
+                <i data-lucide="bar-chart-3" class="w-5 h-5 mr-3 text-slate-400 group-hover:text-slate-600"></i>
+                Full Analytics
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col relative overflow-hidden bg-slate-50/50">
+        
+        <header class="h-16 glass-nav flex items-center justify-between px-8 z-10 shadow-sm">
+            <h1 class="text-2xl font-bold text-slate-800 tracking-tight">Student Database</h1>
+            
+            <!-- Contextual Search Bar -->
+            <div class="relative w-64">
+                <input type="text" id="searchInput" placeholder="Search students..." class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm bg-white/70 backdrop-blur-sm transition-all shadow-sm">
+                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <div class="flex-1 overflow-y-auto p-8 relative">
+            
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden animate-slide-up">
+                
+                <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-800">Enrolled Students Overview</h2>
+                        <p class="text-sm text-slate-500 mt-1">Manage AI dataset profiles and student meta-data.</p>
+                    </div>
+                    <button class="px-4 py-2 bg-blue-600 text-white rounded-xl text-sm font-semibold hover:bg-blue-700 transition shadow flex items-center">
+                        <i data-lucide="user-plus" class="w-4 h-4 mr-2"></i> Register New
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-600">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Roll Number</th>
+                                <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Student Name</th>
+                                <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Class/Batch</th>
+                                <th scope="col" class="px-6 py-4 font-semibold tracking-wider">AI Dataset</th>
+                                <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Status</th>
+                                <th scope="col" class="px-6 py-4 text-right font-semibold tracking-wider">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody" class="divide-y divide-slate-100">
+                            <!-- Loading Skeleton -->
+                            <tr class="animate-pulse">
+                                <td class="px-6 py-4"><div class="h-4 bg-slate-200 rounded w-20"></div></td>
+                                <td class="px-6 py-4"><div class="h-4 bg-slate-200 rounded w-32"></div></td>
+                                <td class="px-6 py-4"><div class="h-4 bg-slate-200 rounded w-24"></div></td>
+                                <td class="px-6 py-4"><div class="h-4 bg-slate-200 rounded w-16"></div></td>
+                                <td class="px-6 py-4"><div class="h-4 bg-slate-200 rounded w-16"></div></td>
+                                <td class="px-6 py-4"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination Footer -->
+                <div class="p-4 border-t border-slate-100 flex items-center justify-between bg-white">
+                    <span class="text-sm text-slate-500">Showing <span class="font-semibold text-slate-700" id="rowCount">0</span> students</span>
+                    <div class="flex items-center space-x-2">
+                        <button class="px-3 py-1.5 border border-slate-200 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 transition cursor-not-allowed opacity-50">Previous</button>
+                        <button class="px-3 py-1.5 border border-slate-200 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 transition">Next</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Script Area -->
+    <script src="js/firebase-config.js"></script>
+    <script>
+        lucide.createIcons();
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const tableBody = document.getElementById('studentsTableBody');
+            
+            try {
+                // Fetch directly from Firestore Web SDK
+                const snapshot = await window.db.collection('students').get();
+                const students = [];
+                snapshot.forEach(doc => {
+                    let student_data = doc.data();
+                    student_data['id'] = doc.id;
+                    students.push(student_data);
+                });
+                
+                renderTable(students);
+            } catch (err) {
+                console.error(err);
+                tableBody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-slate-500 font-medium">
+                    <i data-lucide="server-crash" class="w-8 h-8 text-slate-400 mx-auto mb-2 relative"></i>
+                    Could not connect to Firestore Database. Check API keys.
+                </td></tr>`;
+                lucide.createIcons();
+            }
+        });
+
+        function renderTable(data) {
+            const tableBody = document.getElementById('studentsTableBody');
+            tableBody.innerHTML = '';
+            
+            document.getElementById('rowCount').innerText = data.length;
+
+            if (data.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-slate-500 font-medium">No students registered in Database.</td></tr>`;
+                return;
+            }
+
+            data.forEach(student => {
+                // Determine CSS badge style based on boolean status
+                const statusBadge = student.is_active !== false 
+                    ? '<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center inline-flex"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5"></span> Active</span>'
+                    : '<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-600 border border-red-200 inline-flex">Inactive</span>';
+
+                const datasetCount = student.dataset_images ? student.dataset_images.length : 0;
+                const datasetBadge = datasetCount > 0 
+                    ? `<span class="px-2 py-1 bg-blue-50 text-blue-700 rounded text-xs font-medium border border-blue-100 flex items-center max-w-max"><i data-lucide="image" class="w-3 h-3 mr-1 inline"></i> ${datasetCount} imgs</span>`
+                    : `<span class="px-2 py-1 bg-slate-100 text-slate-500 rounded text-xs font-medium border border-slate-200 max-w-max">Waitlisted</span>`;
+
+                const tr = document.createElement('tr');
+                tr.className = "table-row-hover transition-colors group";
+                
+                tr.innerHTML = `
+                    <td class="px-6 py-4 font-semibold text-slate-800">${student.roll_number}</td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-xs mr-3">
+                                ${student.name.charAt(0)}
+                            </div>
+                            <span class="font-medium text-slate-700">${student.name}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-slate-500">${student.class || 'N/A'}</td>
+                    <td class="px-6 py-4">${datasetBadge}</td>
+                    <td class="px-6 py-4">${statusBadge}</td>
+                    <td class="px-6 py-4 text-right">
+                        <button class="text-slate-400 hover:text-blue-600 transition-colors p-1" title="Edit Student">
+                            <i data-lucide="edit-3" class="w-4 h-4"></i>
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+            
+            lucide.createIcons(); // refresh lucide icons for newly injected HTML
+        }
+
+        // Search Filter Logic
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            const query = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#studentsTableBody tr.group');
+            
+            rows.forEach(row => {
+                // Get the roll number text and name text from the row
+                const rollStr = row.cells[0].innerText.toLowerCase();
+                const nameStr = row.cells[1].innerText.toLowerCase();
+                
+                if (rollStr.includes(query) || nameStr.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

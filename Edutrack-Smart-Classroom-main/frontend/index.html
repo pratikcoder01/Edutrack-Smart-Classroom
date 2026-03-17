@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - EduTrack SaaS</title>
+    <!-- Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- SweetAlert2 for Toast Notifications -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0fdf4;
+            background-image: radial-gradient(at 0% 0%, hsla(217, 100%, 75%, 0.3) 0px, transparent 50%),
+                              radial-gradient(at 100% 100%, hsla(160, 100%, 75%, 0.3) 0px, transparent 50%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="antialiased text-slate-800">
+
+    <!-- Decorative floating elements -->
+    <div class="fixed top-20 left-20 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-2xl opacity-50 animate-float"></div>
+    <div class="fixed bottom-20 right-20 w-72 h-72 bg-green-300 rounded-full mix-blend-multiply filter blur-2xl opacity-50 animate-float" style="animation-delay: 2s;"></div>
+
+    <main class="w-full max-w-md mx-auto p-6 relative z-10">
+        <div class="glass rounded-3xl p-8 shadow-2xl transition-all duration-300 hover:shadow-blue-500/10">
+            <!-- Logo Section -->
+            <div class="flex flex-col items-center justify-center mb-8">
+                <div class="w-16 h-16 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30 mb-4 animate-float">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-indigo-700 text-center tracking-tight">EduTrack SaaS</h1>
+                <p class="text-sm text-slate-500 mt-1 font-medium text-center">AI Classroom Intelligence</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="space-y-6">
+                <div class="space-y-1">
+                    <label for="email" class="text-sm font-semibold text-slate-700 pl-1">Faculty Email</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                            </svg>
+                        </div>
+                        <input type="email" id="email" name="email" required
+                            class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white/50 backdrop-blur-sm transition-all text-slate-700 placeholder-slate-400"
+                            placeholder="alan.turing@university.edu">
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <div class="flex items-center justify-between pl-1">
+                        <label for="password" class="text-sm font-semibold text-slate-700">Password</label>
+                        <a href="#" class="text-xs font-semibold text-blue-600 hover:text-blue-500 transition-colors">Forgot?</a>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                        </div>
+                        <input type="password" id="password" name="password" required
+                            class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white/50 backdrop-blur-sm transition-all text-slate-700 placeholder-slate-400"
+                            placeholder="••••••••">
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" id="loginBtn"
+                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 transform hover:-translate-y-0.5 shadow-blue-500/30 hover:shadow-blue-500/50">
+                        Sign In to Dashboard
+                    </button>
+                </div>
+            </form>
+            
+            <p class="mt-6 text-center text-xs text-slate-500 font-medium">
+                Admin access only. Unauthorized access is monitored.
+            </p>
+        </div>
+    </main>
+
+    <!-- Interfacing with Flask Backend for Authentication -->
+    <!-- EduTrack Frontend API Layer -->
+    <!-- EduTrack API Service -->
+    <script src="js/api.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            const originalText = btn.innerText;
+            
+            // UI Loading state
+            btn.innerHTML = `<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Authenticating...`;
+            btn.disabled = true;
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // Use the centralized EduTrackAPI service
+                const { ok, data, error } = await EduTrackAPI.loginUser(email, password);
+
+                if (ok) {
+                    // Success — persist session info locally
+                    localStorage.setItem('faculty_id', data.faculty_id);
+                    localStorage.setItem('faculty_name', data.name);
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Welcome Back!',
+                        text: `Logged in as ${data.name}`,
+                        timer: 1500,
+                        showConfirmButton: false,
+                        background: '#fff',
+                        customClass: { popup: 'rounded-2xl' }
+                    }).then(() => {
+                        window.location.href = 'dashboard.html';
+                    });
+                } else {
+                    throw new Error(error || 'Invalid credentials');
+                }
+            } catch (err) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Access Denied',
+                    text: err.message === 'Failed to fetch' ? 'Backend server (app.py) is not running on port 5000.' : err.message,
+                    confirmButtonColor: '#3b82f6',
+                    customClass: { popup: 'rounded-2xl' }
+                });
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+            
+            // DEV OVERRIDE (For testing if Flask isn't explicitly requested to be booted up right now)
+            // Comment out the `try-catch` above and use this to bypass if needed:
+            // window.location.href = 'dashboard.html'; 
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Records - EduTrack SaaS</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Icons (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Firebase JS SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+</head>
+<body class="bg-slate-50 flex h-screen overflow-hidden antialiased">
+
+    <!-- Sidebar (Same as other pages) -->
+    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col shadow-sm relative z-20">
+        <div class="h-16 flex items-center px-6 border-b border-slate-100 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center mr-3 shadow-md">
+                <i data-lucide="cpu" class="w-4 h-4 text-white"></i>
+            </div>
+            <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-indigo-700">EduTrack</span>
+        </div>
+        <nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center px-3 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-lg group transition-colors font-medium">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3 text-slate-400 group-hover:text-slate-600"></i>
+                Dashboard
+            </a>
+            <a href="scanner.html" class="flex items-center px-3 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-lg group transition-colors font-medium">
+                <i data-lucide="scan-line" class="w-5 h-5 mr-3 text-slate-400 group-hover:text-slate-600"></i>
+                Live Scanner
+            </a>
+            <a href="students.html" class="flex items-center px-3 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-lg group transition-colors font-medium">
+                <i data-lucide="users" class="w-5 h-5 mr-3 text-slate-400 group-hover:text-slate-600"></i>
+                Students
+            </a>
+            <a href="records.html" class="flex items-center px-3 py-2.5 bg-blue-50 text-blue-700 rounded-lg group transition-colors font-medium">
+                <i data-lucide="clipboard-list" class="w-5 h-5 mr-3 text-blue-600 border border-blue-200 rounded p-0.5 bg-blue-100"></i>
+                Attendance Records
+            </a>
+            <a href="analytics.html" class="flex items-center px-3 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-lg group transition-colors font-medium">
+                <i data-lucide="bar-chart-3" class="w-5 h-5 mr-3 text-slate-400 group-hover:text-slate-600"></i>
+                Full Analytics
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col relative overflow-hidden bg-slate-50/50">
+        
+        <header class="h-16 glass-nav flex items-center justify-between px-8 z-10 shadow-sm">
+            <h1 class="text-2xl font-bold text-slate-800 tracking-tight">System Logs</h1>
+            
+            <button onclick="exportTableToCSV('EduTrack_Attendance_Logs.csv')" class="px-5 py-2.5 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-semibold transition-all shadow-sm flex items-center text-sm">
+                <i data-lucide="downloadCloud" class="w-4 h-4 mr-2 text-indigo-500"></i> Download CSV
+            </button>
+        </header>
+
+        <!-- Content -->
+        <div class="flex-1 overflow-y-auto p-8 relative">
+            
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden animate-slide-up">
+                <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+                    <h2 class="text-lg font-bold text-slate-800">Raw AI Detection Logs</h2>
+                    <p class="text-sm text-slate-500 mt-1">Showing 100 most recent atomic events logged by the computer vision processing node.</p>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-600">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Date & Time</th>
+                                <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Roll No.</th>
+                                <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Identified Student</th>
+                                <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Subject</th>
+                                <th scope="col" class="px-6 py-4 font-semibold tracking-wider">AI Confidence</th>
+                                <th scope="col" class="px-6 py-4 text-right font-semibold tracking-wider">Device ID</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logsTableBody" class="divide-y divide-slate-100">
+                            <tr class="animate-pulse">
+                                <td colspan="6" class="px-6 py-8 text-center text-slate-500">
+                                    <i data-lucide="loader" class="w-6 h-6 mx-auto animate-spin text-slate-400 border border-slate-200 rounded p-0.5"></i>
+                                    Fetching logs from Firestore...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Additional Data Storage Notice -->
+            <div class="mt-6 text-center text-xs font-medium text-slate-400 flex items-center justify-center">
+                <i data-lucide="database" class="w-3 h-3 mr-1"></i> Data synced securely from google cloud firestore
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/firebase-config.js"></script>
+    <script>
+        lucide.createIcons();
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const tableBody = document.getElementById('logsTableBody');
+            
+            try {
+                // Fetch attendance directly via Firebase JS SDK
+                const snapshot = await window.db.collection('attendance_logs').get();
+                const logs = [];
+                snapshot.forEach(doc => {
+                    logs.push(doc.data());
+                });
+                
+                tableBody.innerHTML = '';
+
+                if (logs.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-slate-500 font-medium">No recent logs found. Start the Scanner to generate logs.</td></tr>`;
+                    return;
+                }
+
+                logs.forEach(log => {
+                    // Make confidence look nicer (Green if > 0.90, Yellow if < 0.90)
+                    const confValue = log.confidence_score ? parseFloat(log.confidence_score) : 0;
+                    const confPct = (confValue * 100).toFixed(1);
+                    
+                    let confClass = "bg-green-100 text-green-700";
+                    let confIcon = "check-circle-2";
+                    
+                    if (confValue < 0.85) {
+                        confClass = "bg-yellow-100 text-yellow-700";
+                        confIcon = "alert-circle";
+                    }
+
+                    // Date parsing handling
+                    let dtStr = log.date;
+                    if(log.time && log.time.toDate) { 
+                        dtStr = log.time.toDate().toLocaleString();
+                    }
+
+                    const tr = document.createElement('tr');
+                    tr.className = "table-row-hover transition-colors font-mono text-xs"; // mono font for logs
+                    
+                    tr.innerHTML = `
+                        <td class="px-6 py-3 text-slate-500">${dtStr}</td>
+                        <td class="px-6 py-3 font-semibold text-slate-800">${log.roll_number}</td>
+                        <td class="px-6 py-3 font-medium font-sans text-sm">${log.name || 'Unknown'}</td>
+                        <td class="px-6 py-3 font-sans text-xs">${log.subject || 'Default'}</td>
+                        <td class="px-6 py-3">
+                            <span class="px-2 py-1 rounded inline-flex items-center font-bold font-sans ${confClass}">
+                                <i data-lucide="${confIcon}" class="w-3 h-3 mr-1"></i> ${confPct}%
+                            </span>
+                        </td>
+                        <td class="px-6 py-3 text-right text-slate-400">${log.device_id || 'LOCAL_NODE'}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+                
+                lucide.createIcons();
+                
+            } catch (err) {
+                console.error(err);
+                tableBody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-rose-500 font-medium font-sans">
+                    <i data-lucide="wifi-off" class="w-6 h-6 mx-auto mb-2 relative"></i> Error fetching from Firestore
+                </td></tr>`;
+                lucide.createIcons();
+            }
+        });
+
+        // ==========================================
+        // EXPORT TO CSV RAW STRING BUILDER FUNCTION
+        // ==========================================
+        function exportTableToCSV(filename) {
+            const table = document.querySelector("table");
+            if (!table) return;
+
+            let csv = [];
+            const rows = table.querySelectorAll("tr");
+            
+            for (let i = 0; i < rows.length; i++) {
+                let row = [], cols = rows[i].querySelectorAll("td, th");
+                
+                for (let j = 0; j < cols.length; j++) {
+                    // Extract inner Text without the HTML tags
+                    let data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, " ").trim();
+                    // Escape double quotes
+                    data = data.replace(/"/g, '""');
+                    row.push('"' + data + '"');
+                }
+                csv.push(row.join(","));
+            }
+
+            // Download Link logic
+            let csvFile = new Blob([csv.join("\n")], {type: "text/csv"});
+            let downloadLink = document.createElement("a");
+            downloadLink.download = filename;
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+    </script>
+</body>
+</html>
